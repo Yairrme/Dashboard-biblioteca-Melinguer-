@@ -1,50 +1,56 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useBibliotecaStore } from '@/stores/biblioteca'
+import { useBibliotecaStore } from '../stores/biblioteca'
 
-const router = useRouter()
+const titulo = ref('')
+const autor = ref('')
+const paginas = ref('')
 const store = useBibliotecaStore()
+const router = useRouter()
 
-const form = reactive({
-  titulo: '',
-  autor: '',
-  paginas: 0,
-  disponible: true,
-})
-
-function onSubmit() {
-  if (!form.titulo || !form.autor || !form.paginas) return
-  store.agregarLibro({ ...form })
+const agregarLibro = () => {
+  if (!titulo.value || !autor.value || !paginas.value) return
+  store.agregarLibro({
+    titulo: titulo.value,
+    autor: autor.value,
+    paginas: Number(paginas.value),
+    disponible: true,
+  })
   router.push('/libros')
 }
 </script>
 
 <template>
-  <section class="max-w-xl">
-    <h2 class="text-2xl font-semibold mb-4">Agregar libro</h2>
-    <form @submit.prevent="onSubmit" class="space-y-4 bg-white p-6 rounded-2xl border shadow">
+  <div class="p-6 max-w-md mx-auto">
+    <h2 class="text-2xl font-bold text-emerald-700 mb-4">Agregar Libro</h2>
+
+    <form @submit.prevent="agregarLibro" class="space-y-4">
       <input
-        v-model="form.titulo"
+        v-model="titulo"
+        type="text"
         placeholder="Título"
-        class="w-full px-4 py-2 border rounded-lg"
+        class="w-full border rounded px-3 py-2"
       />
-      <input v-model="form.autor" placeholder="Autor" class="w-full px-4 py-2 border rounded-lg" />
       <input
-        v-model.number="form.paginas"
-        type="number"
-        min="1"
-        placeholder="Páginas"
-        class="w-full px-4 py-2 border rounded-lg"
+        v-model="autor"
+        type="text"
+        placeholder="Autor"
+        class="w-full border rounded px-3 py-2"
       />
-      <label class="flex items-center gap-2">
-        <input type="checkbox" v-model="form.disponible" />
-        <span>Disponible</span>
-      </label>
-      <div class="flex gap-3">
-        <button class="px-4 py-2 rounded-xl bg-slate-900 text-white">Guardar</button>
-        <RouterLink to="/libros" class="px-4 py-2 rounded-xl border">Cancelar</RouterLink>
-      </div>
+      <input
+        v-model="paginas"
+        type="number"
+        placeholder="Páginas"
+        class="w-full border rounded px-3 py-2"
+      />
+
+      <button
+        type="submit"
+        class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700"
+      >
+        Guardar
+      </button>
     </form>
-  </section>
+  </div>
 </template>

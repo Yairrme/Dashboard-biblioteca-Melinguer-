@@ -1,23 +1,21 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import DashboardPage from '../pages/DashboardPage.vue'
+import LibrosList from '../pages/LibrosList.vue'
+import LibrosForm from '../pages/LibrosForm.vue'
 
-const DashboardPage = () => import('@/pages/DashboardPage.vue')
-const LibrosList = () => import('@/pages/LibrosList.vue')
-const LibrosForm = () => import('@/pages/LibrosForm.vue')
-
-const routes: RouteRecordRaw[] = [
-  { path: '/', name: 'home', component: DashboardPage },
+const routes = [
+  { path: '/', component: DashboardPage },
   {
     path: '/libros',
-    component: { template: '<router-view />' }, // contenedor para anidadas
-    children: [
-      { path: '', name: 'libros.list', component: LibrosList },
-      { path: 'nuevo', name: 'libros.new', component: LibrosForm },
-    ],
+    component: LibrosList,
   },
-  { path: '/:pathMatch(.*)*', redirect: '/' },
+  {
+    path: '/libros/nuevo',
+    component: LibrosForm,
+  },
 ]
 
-export const router = createRouter({
+export default createRouter({
   history: createWebHistory(),
   routes,
 })
