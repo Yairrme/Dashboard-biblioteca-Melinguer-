@@ -1,45 +1,62 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { useBibliotecaStore } from '../stores/biblioteca' // 🔹 Store global de Pinia
-import LibroCard from '../components/LibroCard.vue' // 🔹 Componente de tarjeta individual
+import { useBibliotecaStore } from '../stores/biblioteca'
+import LibroCard from '../components/LibroCard.vue'
 
-// Instancias del store y router
+// ✅ Instanciamos el store una sola vez (no duplicar <script setup>)
 const store = useBibliotecaStore()
-const router = useRouter()
 </script>
 
 <template>
-  <div class="p-6">
-    <div class="flex items-center justify-between mb-4">
-      <!-- 🔹 Título principal -->
-      <h2 class="text-2xl font-bold text-blue-700">Lista de Libros</h2>
+  <div class="grid grid-cols-1 md:grid-cols-[240px,1fr] min-h-screen bg-slate-50">
+    <!-- 🔹 Sidebar lateral -->
+    <aside class="bg-white p-5 border-r">
+      <h1 class="text-xl font-bold text-slate-800">📚 Biblioteca</h1>
+      <p class="text-sm text-slate-500 mb-6">Gestión de libros</p>
 
-      <!-- 🔹 Botón para volver al dashboard -->
-      <button
-        @click="router.back()"
-        class="px-3 py-1 text-sm bg-gray-300 rounded hover:bg-gray-400 transition"
-      >
-        Inicio
-      </button>
-    </div>
+      <nav class="flex flex-col gap-2">
+        <!-- Enlace a la lista -->
+        <RouterLink
+          to="/libros"
+          class="text-left px-4 py-2 rounded border transition"
+          active-class="bg-blue-600 text-white border-blue-600"
+        >
+          📖 Ver lista
+        </RouterLink>
 
-    <!-- 🔹 Enlace a la vista para agregar un libro nuevo -->
-    <router-link
-      to="/libros/nuevo"
-      class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700"
-    >
-      ➕ Agregar Libro
-    </router-link>
+        <!-- Enlace al formulario -->
+        <RouterLink
+          to="/libros/nuevo"
+          class="text-left px-4 py-2 rounded border transition"
+          active-class="bg-emerald-600 text-white border-emerald-600"
+        >
+          ➕ Agregar libro
+        </RouterLink>
 
-    <!-- 🔹 Grid que muestra los libros usando el componente LibroCard -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
-      <!-- Evento de prestar/devolver -->
-      <LibroCard
-        v-for="libro in store.ordenPorTitulo"
-        :key="libro.id"
-        :libro="libro"
-        @toggle="store.cambiarDisponibilidad(libro.id)"
-      />
-    </div>
+        <!-- Enlace al inicio -->
+        <RouterLink to="/" class="text-left px-4 py-2 rounded border transition hover:bg-slate-100">
+          🏠 Inicio
+        </RouterLink>
+      </nav>
+    </aside>
+
+    <!-- 🔹 Contenido principal -->
+    <section class="p-6">
+      <!-- 📋 Lista de libros -->
+      <div v-if="$route.path === '/libros'">
+        <h2 class="text-2xl font-bold text-blue-700 mb-4">Lista de Libros</h2>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+          <LibroCard
+            v-for="libro in store.ordenPorTitulo"
+            :key="libro.id"
+            :libro="libro"
+            @toggle="store.cambiarDisponibilidad(libro.id)"
+          />
+        </div>
+      </div>
+
+      <!-- 🧩 Formulario renderizado dentro de la misma vista -->
+      <RouterView />
+    </section>
   </div>
 </template>
