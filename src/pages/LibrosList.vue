@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useBibliotecaStore } from '../stores/biblioteca'
-import LibroCard from '../components/LibroCard.vue'
+import LibroCard from '@/components/LibroCard.vue'
 
 // Instancia del store de Pinia para acceder a los datos de los libros
 const store = useBibliotecaStore()
@@ -18,8 +18,7 @@ const store = useBibliotecaStore()
         to="/"
         class="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm text-slate-700 transition duration-150 ease-in-out hover:bg-slate-100 hover:text-slate-900"
       >
-        <span>🏠</span>
-        <span>Inicio</span>
+        <span> Inicio </span>
       </RouterLink>
     </header>
 

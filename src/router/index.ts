@@ -1,6 +1,6 @@
 // src/router/index.ts
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardPage from '../pages/DashboardPage.vue'
+import DashboardPage from '@/pages/DashboardPage.vue'
 import LibrosList from '../pages/LibrosList.vue'
 import LibrosForm from '../pages/LibrosForm.vue'
 
@@ -10,7 +10,7 @@ const routes = [
     path: '/libros',
     component: LibrosList,
     children: [
-      { path: 'nuevo', component: LibrosForm }, // 👈 anidado correctamente
+      { path: 'nuevo', component: LibrosForm }, // anidado correctamente
     ],
   },
 ]
