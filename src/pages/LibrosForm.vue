@@ -36,14 +36,14 @@ const agregarLibro = () => {
   <div class="p-6 max-w-md mx-auto">
     <div class="flex items-center justify-between mb-4">
       <!-- 🔹 Título de la vista -->
-      <h2 class="text-2xl font-bold text-emerald-700">Agregar Libro</h2>
+      <h2 class="text-2xl font-bold text-gray-700">Agregar Libro</h2>
 
       <!-- 🔹 Botón para volver atrás -->
       <button
         @click="router.back()"
-        class="px-3 py-1 text-sm bg-gray-300 rounded hover:bg-gray-400 transition"
+        class="px-3 py-1 text-sm bg-gray-300 rounded hover:bg-emerald-600 transition"
       >
-        ⬅ Volver
+        Atras
       </button>
     </div>
 
@@ -70,10 +70,7 @@ const agregarLibro = () => {
         class="w-full border rounded px-3 py-2"
       />
 
-      <button
-        type="submit"
-        class="w-full bg-emerald-600 text-white py-2 rounded hover:bg-emerald-700"
-      >
+      <button type="submit" class="w-full bg-gray-600 text-white py-2 rounded hover:bg-emerald-700">
         Guardar
       </button>
     </form>

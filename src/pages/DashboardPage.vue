@@ -1,9 +1,13 @@
 <template>
-  <main class="flex min-h-screen items-center justify-center p-4">
-    <section class="w-full max-w-lg rounded-xl bg-white p-10 text-center shadow-lg">
-      <h1 class="mb-2 text-4xl font-bold text-gray-800">¡Bienvenido!</h1>
+  <main
+    class="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-100 to-blue-50 p-4"
+  >
+    <section
+      class="w-full max-w-lg rounded-xl bg-white p-10 text-center shadow-xl border border-slate-200"
+    >
+      <h1 class="mb-2 text-4xl font-bold text-slate-800">Bienvenido</h1>
 
-      <p class="mb-8 text-lg text-gray-600">Dashboard de la Biblioteca</p>
+      <p class="mb-8 text-lg text-slate-600">Dashboard de la Biblioteca</p>
 
       <router-link
         to="/libros"

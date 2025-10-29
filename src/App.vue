@@ -9,5 +9,3 @@
     <router-view />
   </div>
 </template>
-
-<!-- No necesita <script> ni <style> en este caso -->
