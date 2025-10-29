@@ -9,7 +9,7 @@ defineProps<{
   }
 }>()
 
-defineEmits(['toggle'])
+defineEmits(['toggle']) // Evento para cambiar disponibilidad
 </script>
 
 <template>
@@ -28,7 +28,7 @@ defineEmits(['toggle'])
       class="mt-3 px-3 py-1 text-white rounded"
       :class="libro.disponible ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'"
     >
-      {{ libro.disponible ? 'Prestar' : 'Devolver' }}
+      {{ libro.disponible ? 'Pedir' : 'Devolver' }}
     </button>
   </div>
 </template>
